@@ -41,8 +41,8 @@ function connect() {
     {name: "BBC micro:bit [vaget]"}
   ];
   
-  navigator.bluetooth.requestDevice(options)  
-//  navigator.bluetooth.requestDevice({ acceptAllDevices:true,optionalServices:[LED_SERVICE_UUID]})
+//  navigator.bluetooth.requestDevice(options)  
+  navigator.bluetooth.requestDevice({ acceptAllDevices:true,optionalServices:[LED_SERVICE_UUID]})
   .then(device => {
     bluetoothDevice = device;
     console.log("device", device);

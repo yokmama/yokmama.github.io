@@ -38,11 +38,11 @@ function connect() {
 
   options.filters = [
     {services: [LED_SERVICE_UUID]}, // <- 重要
-    {name: "BBC micro:bit [vaget]"}
+    {name: "BBC micro:bit [gavag]"}
   ];
   
-//  navigator.bluetooth.requestDevice(options)  
-  navigator.bluetooth.requestDevice({ acceptAllDevices:true,optionalServices:[LED_SERVICE_UUID]})
+  navigator.bluetooth.requestDevice(options)  
+//  navigator.bluetooth.requestDevice({ acceptAllDevices:true,optionalServices:[LED_SERVICE_UUID]})
   .then(device => {
     bluetoothDevice = device;
     console.log("device", device);

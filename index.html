@@ -12,9 +12,8 @@
 <input id="message" value="hello" />
 <button id="send">送信</button>
  
-<!--script src="http://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script-->    
-<script src="https://d3js.org/d3.v4.js"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>    
+    
 <script>
 var bluetoothDevice;
 var characteristic;
@@ -34,15 +33,15 @@ d3.select("#send").on("click", sendMessage);
 function connect() {
   let options = {};
  
-  console.log("Connecting...")
-
+  
+  //options.acceptAllDevices = true;
+  
   options.filters = [
     {services: [LED_SERVICE_UUID]}, // <- 重要
     {name: "BBC micro:bit [zigig]"}
   ];
   
-  navigator.bluetooth.requestDevice(options)  
-//  navigator.bluetooth.requestDevice({ acceptAllDevices:true,optionalServices:[LED_SERVICE_UUID]})
+  navigator.bluetooth.requestDevice(options)
   .then(device => {
     bluetoothDevice = device;
     console.log("device", device);
@@ -70,9 +69,6 @@ function connect() {
 function sendMessage() {
   if (!bluetoothDevice || !bluetoothDevice.gatt.connected || !characteristic) return ;
   var text = document.querySelector("#message").value;
-  
-  console.log("writing "+text)
-
   var arrayBuffe = new TextEncoder().encode(text);
   characteristic.writeValue(arrayBuffe);        
 }

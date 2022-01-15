@@ -1,12 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
   <head>
+    <meta charset="UTF-8">
     <title> これはテストページです </title>
+    <script type="text/javascript" src="js/yahoo.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<script type="text/javascript" src="js/dom.js"></script>
+<script type="text/javascript" src="js/container.js"></script>
+<style type="text/css">
+.tt {
+	position: absolute;
+	padding: 4px;
+	color: #333333;
+	background-color: #DDEEFF;
+	border:1px solid #66CCFF;
+	width: 320px;
+	font-size: 13px;
+}
+</style>
+<script type="text/javascript">
+　　　function init() {
+　　　　　var list = document.getElementById('links').getElementsByTagName('a');
+　　　　　for( var i=0; i<list.length; i++ ) {
+　　　　　　　var el = 'tooltip'+i;
+　　　　　　　var url = list[i].href;
+　　　　　　　if ( ! url.match( /^https?:/ )) continue;
+　　　　　　　var title = '<img src="http://img.simpleapi.net/small/'+url+'">';
+　　　　　　　if ( list[i].title ) title += list[i].title;
+　　　　　　　var tp = new YAHOO.widget.Tooltip( el, { context:list[i], text: title, autodismissdelay: 5000 } );
+　　　　　}
+　　　}
+　　　YAHOO.util.Event.addListener(window, "load", init);
+</script>
   </head>
 
   <body>
         
     <h1>Helo World</h1>
-    <a href="https://www.spiderman-movie.jp/" >スパイダーマン公式サイト</a>
-
+    <ul id="links">
+    <li><a href="https://www.spiderman-movie.jp/" >スパイダーマン公式サイト</a></li>
+    </ul>
   </body>
 </html>  

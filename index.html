@@ -2,10 +2,139 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>これはテストページです</title>
+    <title>摂取カロリー計算</title>
+
+    <style>
+      .diet_form {
+        background: #e6e6fa;
+        padding: 10px 30px;
+      }
+
+      form dl dt {
+        width: 200px;
+        height: 40px;
+        padding: 10px 0;
+        line-height: 40px;
+        float: left;
+      }
+
+      form dl dd {
+        padding: 10px 0;
+        margin: 0;
+      }
+
+      .box {
+        box-sizing: border-box;
+        width: 150px;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .calc-btn {
+        width: 80px;
+        height: 30px;
+        border: 1px solid #333;
+      }
+
+      .calc-btn:hover {
+        cursor: pointer;
+      }
+    </style>
+
+    <script type="text/javascript">
+      function calc(omosa, bfp) {
+        console.log("weight=", omosa);
+        console.log("bfp=", bfp);
+
+        const lbm = Math.round((omosa - omosa * (bfp / 100)) * 100) / 100;
+        const cal = Math.round(lbm * 40);
+        const protein = Math.round(lbm * 2);
+        const fat = Math.round(lbm * 0.9);
+        const carbo = Math.round((cal - protein * 4 - fat * 9) / 4);
+
+        document.getElementById("lean").value = lbm;
+        document.getElementById("cal").value = cal;
+        document.getElementById("protein").value = protein;
+        document.getElementById("fat").value = fat;
+        document.getElementById("carbo").value = carbo;
+      }
+    </script>
   </head>
 
   <body>
-    <h1>こんにちは</h1>
+    <form class="diet_form">
+      <dl>
+        <dt>体重：</dt>
+        <dd><input type="number" name="omosa" class="box" value="0" /></dd>
+        <dt>体脂肪率（%)：</dt>
+        <dd><input type="number" name="bpf" class="box" value="0" /></dd>
+
+        <p>
+          <input
+            type="button"
+            onclick="calc(omosa.value, bpf.value);"
+            class="calc-btn"
+            value="計算"
+          />
+        </p>
+
+        <dt>LBM(除脂肪体重(kg))：</dt>
+        <dd>
+          <input
+            id="lean"
+            type="text"
+            name="weight"
+            class="box"
+            readonly="true"
+            value="0"
+          />
+        </dd>
+        <dt>摂取カロリー(kcal)：</dt>
+        <dd>
+          <input
+            id="cal"
+            type="text"
+            name="weight"
+            class="box"
+            readonly="true"
+            value="0"
+          />
+        </dd>
+        <dt>タンパク質(g)：</dt>
+        <dd>
+          <input
+            id="protein"
+            type="text"
+            name="weight"
+            class="box"
+            readonly="true"
+            value="0"
+          />
+        </dd>
+        <dt>脂質(g)：</dt>
+        <dd>
+          <input
+            id="fat"
+            type="text"
+            name="weight"
+            class="box"
+            readonly="true"
+            value="0"
+          />
+        </dd>
+        <dt>炭水化物(g)：</dt>
+        <dd>
+          <input
+            id="carbo"
+            type="text"
+            name="weight"
+            class="box"
+            readonly="true"
+            value="0"
+          />
+        </dd>
+      </dl>
+    </form>
   </body>
 </html>
